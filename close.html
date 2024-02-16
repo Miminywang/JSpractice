@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Close Function</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <style>
+      .container {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .resetBtn {
+        display: none;
+      }
+
+      .alert {
+        position: relative;
+        width: 500px;
+      }
+
+      .close {
+        position: absolute;
+        top: 2px;
+        right: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarTogglerDemo01"
+          aria-controls="navbarTogglerDemo01"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+          <!-- <a class="navbar-brand" href="#">Hidden brand</a> -->
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="./bmi.html"
+                >BMI Calculator</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./leapYear.html"
+                >Leap Year Calculator</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./timesTable.html">Times Table</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./tempConvert.html"
+                >Temperature Conversion</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./ageCalc.html">Age Calculator</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./validation.html"
+                >Password Validation</a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./close.html">Close Function</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./carousel.html">Carousel</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="./accountBook.html">Account Book</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- start -->
+    <div class="container">
+      <h1>Close Function</h1>
+      <div class="inner-container">
+        <div class="alert alert-secondary alert-question">
+          <button class="close btn btn-light">x</button>
+          <p>確認是否執行動作訊息</p>
+        </div>
+        <div class="alert alert-success">
+          <button class="close btn btn-light">x</button>
+          <p>成功訊息。</p>
+        </div>
+        <div class="alert alert-danger alert-error">
+          <button class="close btn btn-light">x</button>
+          <p>錯誤訊息。</p>
+        </div>
+        <div class="alert alert-warning">
+          <button class="close btn btn-light">x</button>
+          <p>警示訊息。</p>
+        </div>
+        <button id="resetBtn" class="resetBtn btn btn-primary">Reset</button>
+      </div>
+    </div>
+
+    <script>
+      let reset = document.querySelector(".resetBtn");
+      let alerts = document.querySelectorAll(".alert");
+      let closeBtns = document.querySelectorAll(".close");
+
+      document.addEventListener("click", function (event) {
+        // 檢查"事件(event)"是關閉按鈕
+        // classList用於添加、刪除、切換、檢查是否包含
+        if (event.target.classList.contains("close")) {
+          // parentElement 屬性用於獲取父級元素。
+          let parentAlert = event.target.parentElement;
+          parentAlert.style.display = "none";
+          // 置於此是因為在關閉按鈕被點擊時，才需要檢查
+          // 檢查是否所有關閉按鈕被點擊且警示框隱藏
+          checkResetBtnVisibility();
+        } else if (event.target.classList.contains("resetBtn")) {
+          alerts.forEach(function (alert) {
+            alert.style.display = "block";
+          });
+          resetBtn.style.display = "none"; // 重新隱藏 reset 按鈕
+        }
+      });
+
+      function checkResetBtnVisibility() {
+        let allClosed = true;
+        closeBtns.forEach(function (closeBtn) {
+          // 檢查關閉按鈕所屬的元素在頁面中是否可見，如果不可見則設置 allClosed 為 false
+          if (closeBtn.offsetParent !== null) {
+            allClosed = false;
+          }
+        });
+        // 如果所有警示框都已關閉，顯示 reset 按鈕
+        if (allClosed) {
+          reset.style.display = "block";
+        }
+      }
+    </script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
